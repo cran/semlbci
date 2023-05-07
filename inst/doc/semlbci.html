@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Shu Fai Cheung" />
+
+<meta name="date" content="2023-05-04" />
+
+<title>Get Started</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Get Started</h1>
+<h4 class="author">Shu Fai Cheung</h4>
+<h4 class="date">2023-05-04</h4>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The package <a href="https://sfcheung.github.io/semlbci/"><code>semlbci</code></a> (<a href="https://doi.org/10.1080/10705511.2023.2183860">Cheung &amp;
+Pesigan, 2023</a>) includes functions for finding the likelihood-based
+confidence intervals (LBCIs) of parameters in the output of a structural
+equation modeling (SEM) function. Currently, it supports the output from
+<code>lavaan::lavaan()</code> and its wrappers, such as
+<code>lavaan::sem()</code> and <code>lavaan::cfa()</code>.</p>
+<p>The latest stable version can be installed from GitHub:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;sfcheung/semlbci&quot;</span>)</span></code></pre></div>
+<p>Further information about <code>semlbci</code> can be found in <a href="https://doi.org/10.1080/10705511.2023.2183860">Cheung and Pesigan
+(2023)</a>.</p>
+</div>
+<div id="fit-a-model-to-a-dataset" class="section level1">
+<h1>Fit a Model to a Dataset</h1>
+<p>The package has a dataset, <code>simple_med</code>, with three
+variables, <code>x</code>, <code>m</code>, and <code>y</code>. Let us
+fit a simple mediation model to this dataset.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semlbci)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(simple_med)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> simple_med</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            x          m         y</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 -0.3447375   7.284273 -5.636897</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 -0.3658919  -5.449121 -4.525402</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 -0.8294968  -7.016254 -7.823257</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 -0.3389654   4.367018  1.563098</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 -0.9628162  -4.015469 -7.288511</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 -1.0749302 -11.538140 -4.153572</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">m ~ a*x</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">y ~ b*m</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">ab := a * b</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># We set fixed.x = FALSE because we will also find the LBCIs for</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># standardized solution</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod, simple_med, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>To illustrate how to find the LBCIs for user-defined parameters, we
+labelled the <code>m ~ x</code> path by <code>a</code>, the
+<code>y ~ m</code> path by <code>b</code>, and defined the indirect
+effect, <code>ab</code>, by <code>a * b</code>.</p>
+<p>This is the summary:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lavaan 0.6.15 ended normally after 1 iteration</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Estimator                                         ML</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Optimization method                           NLMINB</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Number of model parameters                         5</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Number of observations                           200</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Model Test User Model:</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                       </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Test statistic                                10.549</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Degrees of freedom                                 1</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   P-value (Chi-square)                           0.001</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Parameter Estimates:</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Standard errors                             Standard</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Information                                 Expected</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Information saturated (h1) model          Structured</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Regressions:</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   m ~                                                                   </span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     x          (a)    1.676    0.431    3.891    0.000    1.676    0.265</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   y ~                                                                   </span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     m          (b)    0.535    0.073    7.300    0.000    0.535    0.459</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Variances:</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    .m                34.710    3.471   10.000    0.000   34.710    0.930</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    .y                40.119    4.012   10.000    0.000   40.119    0.790</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     x                 0.935    0.094   10.000    0.000    0.935    1.000</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Defined Parameters:</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ab                0.897    0.261    3.434    0.001    0.897    0.122</span></span></code></pre></div>
+</div>
+<div id="examples" class="section level1">
+<h1>Examples</h1>
+<p>The main function to find the LBCIs for free parameters is
+<code>semlbci()</code>. This should be the only function used by normal
+users. We will first illustrate its usage by some examples, and then
+present other technical details in the following section.</p>
+<div id="find-the-lbci-for-a-free-parameter" class="section level2">
+<h2>Find the LBCI for a free parameter</h2>
+<p>All free parameters can be specified in <code>lavaan</code> style.
+For example, the path from <code>m</code> to <code>y</code> is denoted
+by <code>&quot;y ~ m&quot;</code>, and the covariance or correlation between
+<code>x</code> and <code>m</code> (not in the example) is denoted by
+<code>&quot;x ~~ m&quot;</code> (order does not matter).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">semlbci</span>(<span class="at">sem_out =</span> fit,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;y ~ m&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;m ~ x&quot;</span>))</span></code></pre></div>
+<p>The output is the parameter table of the fitted <code>lavaan</code>
+object, with two columns added, <code>lbci_lb</code> and
+<code>lbci_ub</code>, the likelihood-based lower bounds and upper
+bounds, respectively.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>out</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id lhs op rhs label   est lbci_lb lbci_ub    lb    ub cl_lb cl_ub</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  1   m  ~   x     a 1.676   0.828   2.525 0.832 2.520 0.950 0.950</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2   y  ~   m     b 0.535   0.391   0.679 0.391 0.679 0.950 0.950</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Annotation:</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * lbci_lb, lbci_ub: The lower and upper likelihood-based bounds.</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * est: The point estimates from the original lavaan output.</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * lb, ub: The original lower and upper bounds, extracted from the</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     original lavaan output. Usually Wald CIs for free parameters and</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     delta method CIs for user-defined parameters</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * cl_lb, cl_ub: One minus the p-values of chi-square difference tests</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     at the bounds. Should be close to the requested level of</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     confidence, e.g., .95 for 95% confidence intervals.</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; semlbci(sem_out = fit, pars = c(&quot;y ~ m&quot;, &quot;m ~ x&quot;))</span></span></code></pre></div>
+<p>In this example, the point estimate of the unstandardized coefficient
+from <code>x</code> to <code>m</code> is 1.676, and the LBCI is 0.828 to
+2.525.</p>
+</div>
+<div id="find-the-lbci-for-a-user-defined-parameter" class="section level2">
+<h2>Find the LBCI for a User-Defined Parameter</h2>
+<p>To find the LBCI for a user-defined parameter, use
+<code>label :=</code>, where <code>label</code> is the label used in the
+model specification. The definition of this parameter can be omitted.
+The content after <code>:=</code> will be ignored by
+<code>semlbci()</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">semlbci</span>(<span class="at">sem_out =</span> fit,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;ab := &quot;</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out, <span class="at">annotation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id lhs op rhs label   est lbci_lb lbci_ub    lb    ub cl_lb cl_ub</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  6  ab := a*b    ab 0.897   0.427   1.464 0.385 1.409 0.950 0.950</span></span></code></pre></div>
+<p>In this example, the point estimate of the indirect effect is 0.897,
+and the LBCI is 0.427 to 1.464.</p>
+<p>(Note: In some examples, we added <code>annotation = FALSE</code> to
+suppress the annotation in the printout to minimize the length of this
+vignette.)</p>
+</div>
+<div id="find-the-lbci-for-the-parameters-in-the-standardized-metric" class="section level2">
+<h2>Find the LBCI for the Parameters in the Standardized Metric</h2>
+<p>By the default, the unstandardized solution is used by
+<code>semlbci()</code>. If the LBCIs for the standardized solution
+solution are needed, set <code>standardized = TRUE</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">semlbci</span>(<span class="at">sem_out =</span> fit,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;y ~ m&quot;</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;m ~ x&quot;</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out, <span class="at">annotation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   lhs op rhs id label est.std lbci_lb lbci_ub    lb    ub cl_lb cl_ub</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   m  ~   x  1     a   0.265   0.133   0.389 0.136 0.394 0.950 0.950</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   y  ~   m  2     b   0.459   0.342   0.561 0.349 0.568 0.950 0.950</span></span></code></pre></div>
+<p>The LBCIs for standardized user-defined parameters can be requested
+similarly.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">semlbci</span>(<span class="at">sem_out =</span> fit,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;ab :=&quot;</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out, <span class="at">annotation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   lhs op rhs id label est.std lbci_lb lbci_ub    lb    ub cl_lb cl_ub</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  ab := a*b  6    ab   0.122   0.059   0.194 0.054 0.189 0.950 0.950</span></span></code></pre></div>
+</div>
+</div>
+<div id="basic-arguments-in-semlbci" class="section level1">
+<h1>Basic Arguments in <code>semlbci()</code></h1>
+<div id="sem_out-and-pars-the-fit-object-and-the-parameters" class="section level2">
+<h2><code>sem_out</code> and <code>pars</code>: The fit object and the
+parameters</h2>
+<p>The only required argument for <code>semlbci()</code> is
+<code>sem_out</code>, the fit object from <code>lavaan::lavaan()</code>
+or its wrappers (e.g., <code>lavann::cfa()</code> and
+<code>lavaan::sem()</code>). By default, <code>semlbci()</code> will
+find the LBCIs for all free parameters (except for variances and error
+variances) and user-defined parameters, which can take a long time for a
+model with many parameters. Moreover, LBCI is usually used when
+Wald-type confidence interval may not be suitable, for example, forming
+the confidence interval for an indirect effect or a parameter in the
+standardized solution. These parameters may have sampling distributions
+that are asymmetric or otherwise substantially nonnormal due to bounded
+parameter spaces or other reasons.</p>
+<p>Therefore, it is recommended to call <code>semlbci()</code> without
+specifying any parameters. If the time to run is long, then call
+<code>semlbci()</code> only for selected parameters. The argument
+<code>pars</code> should be a model syntax or a vector of strings which
+specifies the parameters for which LBCIs will be formed (detailed
+below).</p>
+<p>If time is not a concern, for example, when users want to explore the
+LBCIs for all free and user-defined parameters in a final model, then
+<code>pars</code> can be omitted to request the LBCIs for all free
+parameters (except for variances and covariances) and user-defined
+parameters (if any) in a model.</p>
+</div>
+<div id="ciperc-the-level-of-confidence" class="section level2">
+<h2><code>ciperc</code>: The level of confidence</h2>
+<p>By default, the 95% LBCIs for the unstandardized solution will be
+formed. To change the level of confidence, set the argument
+<code>ciperc</code> to the desired coverage probability, e.g., .95 for
+95%, .90 for 90%.</p>
+</div>
+<div id="standardized-whether-standardized-solution-is-used" class="section level2">
+<h2><code>standardized</code>: Whether standardized solution is
+used</h2>
+<p>By default, the LBCIs for the unstandardized solution will be formed.
+If the LBCIs for the standardized solution are desired, set
+<code>standardized = TRUE</code>. Note that for some models it can be
+much slower to find the LBCIs for the standardized solution than for the
+unstandardized solution.</p>
+</div>
+<div id="parallel-and-ncpus" class="section level2">
+<h2><code>parallel</code> and <code>ncpus</code></h2>
+<p>The search for the bounds needs to be done separately for each bound
+and this can take a long time for a model with many parameters and/or
+with equality constraints. Therefore, parallel processing should always
+be enabled by setting <code>parallel</code> to <code>TRUE</code> and
+<code>ncpus</code> to a number smaller than the number of available
+cores. For example, without parallel processing, the following search
+took about 28 seconds on Intel i7-8700:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HolzingerSwineford1939)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mod_test <span class="ot">&lt;-</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">visual  =~ x1 + x2 + x3</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">textual =~ x4 + x5 + x6</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">speed   =~ x7 + x8 + x9</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>fit_cfa <span class="ot">&lt;-</span> <span class="fu">cfa</span>(<span class="at">model =</span> mod_test,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> HolzingerSwineford1939)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">semlbci</span>(fit_cfa)</span></code></pre></div>
+<p>With parallel processing enabled and using 6 cores, it took about 20
+seconds.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">semlbci</span>(fit_cfa,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">parallel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ncpus =</span> <span class="dv">6</span>)</span></code></pre></div>
+<p>The speed difference can be much greater for a model with many
+parameters and some equality constraints.</p>
+<p>Enabling parallel processing also has the added benefit of showing
+the progress in real time.</p>
+</div>
+<div id="other-arguments" class="section level2">
+<h2>Other arguments</h2>
+<p>For detailed documentation of other arguments, please refer to the
+help page of <code>semlbci()</code>. Advanced users who want to tweak
+the optimization options can check the help pages of
+<code>ci_bound_wn_i()</code> and <code>ci_i_one()</code>,</p>
+</div>
+</div>
+<div id="additional-features" class="section level1">
+<h1>Additional Features</h1>
+<div id="multiple-group-models" class="section level2">
+<h2>Multiple-group Models</h2>
+<p><code>semlbci()</code> supports multiple-group models. For example,
+this is a two-group confirmatory factor analysis model with equality
+constraints:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HolzingerSwineford1939)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mod_cfa <span class="ot">&lt;-</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">visual  =~ x1 + v(lambda2, lambda2)*x2 + v(lambda3, lambda3)*x3</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">textual =~ x4 + v(lambda5, lambda5)*x5 + v(lambda6, lambda6)*x6</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">speed   =~ x7 + v(lambda8, lambda8)*x8 + v(lambda9, lambda9)*x9</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>fit_cfa <span class="ot">&lt;-</span> <span class="fu">cfa</span>(<span class="at">model =</span> mod_cfa,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> HolzingerSwineford1939,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">group =</span> <span class="st">&quot;school&quot;</span>)</span></code></pre></div>
+<p>The factor correlations between group are not constrained to be
+equal.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parameterEstimates</span>(fit_cfa)[<span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">23</span>, <span class="dv">58</span>, <span class="dv">59</span>), ]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       lhs op     rhs block group label   est    se     z pvalue ci.lower</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 visual ~~ textual     1     1       0.416 0.097 4.271  0.000    0.225</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 visual ~~   speed     1     1       0.169 0.064 2.643  0.008    0.044</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58 visual ~~ textual     2     2       0.437 0.099 4.423  0.000    0.243</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 59 visual ~~   speed     2     2       0.314 0.079 3.958  0.000    0.158</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    ci.upper</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22    0.606</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23    0.294</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58    0.631</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 59    0.469</span></span></code></pre></div>
+<p>This is the LBCI for covariance between visual ability and textual
+ability:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fcov <span class="ot">&lt;-</span> <span class="fu">semlbci</span>(fit_cfa,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;visual ~~ textual&quot;</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fcov, <span class="at">annotation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    id    lhs op     rhs group label   est lbci_lb lbci_ub    lb    ub cl_lb</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 22 visual ~~ textual     1       0.416   0.221   0.654 0.225 0.606 0.950</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58 58 visual ~~ textual     2       0.437   0.263   0.663 0.243 0.631 0.950</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    cl_ub</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 0.950</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58 0.950</span></span></code></pre></div>
+<p>This is the LBCI for correlation between visual ability and textual
+ability:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fcor <span class="ot">&lt;-</span> <span class="fu">semlbci</span>(fit_cfa,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;visual ~~ textual&quot;</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fcor, <span class="at">annotation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       lhs op     rhs group id label est.std lbci_lb lbci_ub    lb    ub cl_lb</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 visual ~~ textual     1 22         0.485   0.291   0.640 0.315 0.654 0.950</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58 visual ~~ textual     2 58         0.540   0.357   0.692 0.373 0.708 0.950</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    cl_ub</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 0.950</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58 0.950</span></span></code></pre></div>
+</div>
+<div id="robust-lbci" class="section level2">
+<h2>Robust LBCI</h2>
+<p><code>semlbci()</code> also supports the robust LBCI proposed by Falk
+(2018). To form robust LBCI, the model must be fitted with robust test
+statistics requested (e.g., <code>estimator = &quot;MLR&quot;</code>). To request
+robust LBCIs, add <code>robust = &quot;satorra.2000&quot;</code> when calling
+<code>semlbci()</code>.</p>
+<p>We use the simple mediation model as an example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fit_robust <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod, simple_med,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fixed.x =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">estimator =</span> <span class="st">&quot;MLR&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>fit_lbci_ab_robust <span class="ot">&lt;-</span> <span class="fu">semlbci</span>(fit_robust,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">pars =</span> <span class="st">&quot;ab := &quot;</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">robust =</span> <span class="st">&quot;satorra.2000&quot;</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit_lbci_ab_robust, <span class="at">annotation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id lhs op rhs label   est lbci_lb lbci_ub    lb    ub cl_lb cl_ub</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  6  ab := a*b    ab 0.897   0.353   1.571 0.299 1.495 0.950 0.950</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         robust</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 satorra.2000</span></span></code></pre></div>
+</div>
+<div id="latent-level-parameters" class="section level2">
+<h2>Latent level parameters</h2>
+<p><code>semlbci()</code> support forming the LBCIs for most free
+parameters. Not illustrated above but LBCIs can be formed for path
+coefficients between latent variables and also user-defined parameters
+based on latent-level parameters, such as an indirect effect from one
+latent variable to another.</p>
+</div>
+<div id="more-examples" class="section level2">
+<h2>More examples</h2>
+<p>More examples can be found in the “examples” folders in <a href="https://osf.io/b9a2p/files/osfstorage">the OSF page</a> for this
+package.</p>
+</div>
+</div>
+<div id="limitations" class="section level1">
+<h1>Limitations</h1>
+<p>The following is a summary of the limitations of
+<code>semlbci()</code>. Please refer to <code>check_sem_out()</code> for
+the full list of limitations. This function is called by
+<code>semlbci()</code> to check the <code>sem_out</code> object, and
+will raise warnings or errors as appropriate.</p>
+<div id="estimators" class="section level2">
+<h2>Estimators</h2>
+<p>The function <code>semlbci()</code> currently supports
+<code>lavaan::lavaan()</code> results estimated by maximum likelihood
+(<code>ML</code>), full information maximum likelihood for missing data
+(<code>fiml</code>), and their robust variants (e.g.,
+<code>MLM</code>).</p>
+</div>
+<div id="models" class="section level2">
+<h2>Models</h2>
+<p>This package currently supports single and multiple group models with
+continuous variables. It <em>may</em> work for a model with ordered
+variables but this is not officially tested.</p>
+</div>
+<div id="methods" class="section level2">
+<h2>Methods</h2>
+<p>The current and preferred method is the one proposed by Wu and Neale
+(2012), illustrated by Pek and Wu (2015). The current implementation in
+<code>semlbci()</code> does not check whether a parameter is near its
+boundary. The more advanced methods by Pritikin, Rappaport, and Neale
+(2017) will be considered in future development.</p>
+</div>
+</div>
+<div id="technical-details" class="section level1">
+<h1>Technical Details</h1>
+<p>A detailed presentation of the internal workflow of
+<code>semlbci()</code> can be found in the
+<code>vignette(&quot;technical_workflow&quot;, package = &quot;semlbci&quot;)</code>. Users
+interested in calling the lowest level function,
+<code>ci_bound_wn_i()</code>, can see some illustrative examples in
+<code>vignette(&quot;technical_searching_one_bound&quot;, package = &quot;semlbci&quot;)</code>.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>Cheung, S. F., &amp; Pesigan, I. J. A. (2023). <em>semlbci</em>: An R
+package for forming likelihood-based confidence intervals for parameter
+estimates, correlations, indirect effects, and other derived parameters.
+<em>Structural Equation Modeling: A Multidisciplinary Journal</em>.
+Advance online publication. <a href="https://doi.org/10.1080/10705511.2023.2183860" class="uri">https://doi.org/10.1080/10705511.2023.2183860</a></p>
+<p>Falk, C. F. (2018). Are robust standard errors the best approach for
+interval estimation with nonnormal data in structural equation modeling?
+<em>Structural Equation Modeling: A Multidisciplinary Journal,
+25</em>(2), 244-266. <a href="https://doi.org/10.1080/10705511.2017.1367254" class="uri">https://doi.org/10.1080/10705511.2017.1367254</a></p>
+<p>Pek, J., &amp; Wu, H. (2015). Profile likelihood-based confidence
+intervals and regions for structural equation models. <em>Psychometrika,
+80</em>(4), 1123–1145. <a href="https://doi.org/10.1007/s11336-015-9461-1" class="uri">https://doi.org/10.1007/s11336-015-9461-1</a></p>
+<p>Pritikin, J. N., Rappaport, L. M., &amp; Neale, M. C. (2017).
+Likelihood-based confidence intervals for a parameter with an upper or
+lower bound. <em>Structural Equation Modeling: A Multidisciplinary
+Journal, 24</em>(3), 395-401. <a href="https://doi.org/10.1080/10705511.2016.1275969" class="uri">https://doi.org/10.1080/10705511.2016.1275969</a></p>
+<p>Wu, H., &amp; Neale, M. C. (2012). Adjusted confidence intervals for
+a bounded parameter. <em>Behavior Genetics, 42</em>(6), 886–898. <a href="https://doi.org/10.1007/s10519-012-9560-z" class="uri">https://doi.org/10.1007/s10519-012-9560-z</a></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
