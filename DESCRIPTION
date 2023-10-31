@@ -1,7 +1,7 @@
 Package: semlbci
 Title: Likelihood-Based Confidence Interval in Structural Equation
         Models
-Version: 0.10.3
+Version: 0.10.4
 Authors@R: 
     c(
       person(given = "Shu Fai",
@@ -38,10 +38,10 @@ Config/testthat/parallel: true
 Config/testthat/edition: 3
 Config/testthat/start-first: semlbci_wn_mg_*
 NeedsCompilation: no
-Packaged: 2023-05-05 11:49:20 UTC; sfcheung
+Packaged: 2023-10-31 14:13:56 UTC; sfcheung
 Author: Shu Fai Cheung [aut, cre] (<https://orcid.org/0000-0002-9871-9448>),
   Ivan Jacob Agaloos Pesigan [ctb]
     (<https://orcid.org/0000-0003-4818-8420>)
 Maintainer: Shu Fai Cheung <shufai.cheung@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-05-07 10:20:02 UTC
+Date/Publication: 2023-10-31 14:50:02 UTC
