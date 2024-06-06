@@ -1,3 +1,100 @@
+# semlbci 0.11.2
+
+## New Feature
+
+- Added the method `"ur"` for forming the
+  LBCI. It uses root finding without
+  derivatives. It is inefficient
+  (*very* slow) because
+  a model with an equality constraint is
+  fitted in each iteration. However, it
+  may be able to find the bound for a
+  parameter when the `"wn"` method
+  cannot. It also supports robust LBCIs
+  using Satorra (2000) chi-square
+  difference test. (0.10.4.2)
+
+- Add `get_cibound_status_not_0()`. It
+  checks the status of each bound in
+  a `semlbci` object, and returns as
+  a list the `cibound` objects of
+  bounds with status not equal to zero.
+  For diagnostic purpose. (0.10.4.13)
+
+- When calling `semlbci()`, users can
+  use `lavaan` model syntax operators to
+  select parameters. Supported operators
+  are `"~"`, `"~~"`, `"=~"`, and `":="`.
+  (0.10.4.25)
+
+## (Possibly) Breaking Changes
+
+- Disabled some further attempts in
+  the `wn` method by default
+  as they rarely help but they usually
+  increase
+  the processing time unnecessarily.
+  If necessary, one of the set of
+  attempts, successively lowering the
+  lower limits of variances can be
+  enabled again by setting `try_lb`
+  to `TRUE` when calling `semlbci()`
+  (0.10.4.6)
+
+- Added the `timeout` argument to
+  `ci_bound_wn_i()`, default to 300
+  (300 seconds or 5 minutes). Can be
+  used in `semlbci()` too if the method
+  is `"wn"` (the default).
+  (0.10.4.21)
+
+## Miscellaneous
+
+- Added the option to use load balancing
+  when calling `semlbci()` with
+  `use_pbapply` set to `TRUE`. Enabled
+  by default. (0.10.4.3)
+
+- Added support for dynamic scheduling
+  in `semlbci()` when `parallel` is
+  `FALSE`. (0.10.4.27)
+
+- Added `fit_lb` and `fit_ub` arguments
+  to `ci_bound_wn_i()` for setting
+  the bounds. Can also be used
+  in `semlbci()` if the method is
+  `"wn"` (the defalt).
+  (0.10.4.18, 0.10.4.19)
+
+- In `print.semlbci()`, added
+  suggestions on what to do if some
+  bounds could not be found (0.10.4.22)
+
+- Use whitespace instead of tab to
+  align the output of `print.cibound()`.
+  (0.10.4.23)
+
+## Bug Fixes
+
+- Revised `ci_bound_wn_i()` and
+  `ci_bound_ur_i()` to make
+  sure the bound is a numeric object,
+  even if `NA`. (0.10.4.5)
+
+- Fixed a bug in `print.cibound()` when
+  the call is of the form `xxx::yyy()`.
+  (0.10.4.17)
+
+- Fixed a bug with `std_lav()` for
+  models with only one factor.
+  (0.10.4.20)
+
+- Fixed a bug with `semlbci()`.
+  Intercepts are now automatically
+  skipped if `standardized` is `TRUE`,
+  as stated in the help page.
+  (0.10.4.24)
+
 # semlbci 0.10.4
 
 ## New Feature

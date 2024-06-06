@@ -71,8 +71,8 @@
 #' @param standardized If `TRUE`, the LBCI is for the standardized estimates.
 #'
 #' @param method The method to be used to search for the confidence
-#'  bounds. Currently only `"wn"` (Wu-Neale-2012), the default, is
-#'  supported.
+#'  bounds. Supported methods are`"wn"` (Wu-Neale-2012), the default,
+#' and `"ur"` (root finding by [stats::uniroot()]).
 #'
 #' @param robust Whether the LBCI based on robust likelihood ratio
 #'  test is to be found. Only `"satorra.2000"` in [lavaan::lavTestLRT()]
@@ -106,6 +106,11 @@
 #'  progress bar when finding the intervals. Default is `TRUE`.
 #'  Ignored if `pbapply` is not installed.
 #'
+#' @param loadbalancing Whether load
+#' balancing is used when `parallel`
+#' is `TRUE` and `use_pbapply` is
+#' `TRUE`.
+#'
 #' @author Shu Fai Cheung <https://orcid.org/0000-0002-9871-9448>
 #'
 #' @references
@@ -114,8 +119,8 @@
 #' An R package for forming likelihood-based confidence
 #' intervals for parameter estimates, correlations,
 #' indirect effects, and other derived parameters.
-#' *Structural Equation Modeling: A Multidisciplinary Journal*.
-#' Advance online publication.
+#' *Structural Equation Modeling: A Multidisciplinary Journal*,
+#' *30*(6), 985--999.
 #' \doi{10.1080/10705511.2023.2183860}
 #'
 #' Falk, C. F. (2018). Are robust standard errors the best approach
@@ -168,7 +173,7 @@ semlbci <- function(sem_out,
                     remove_intercepts = TRUE,
                     ciperc = .95,
                     standardized = FALSE,
-                    method = "wn",
+                    method = c("wn", "ur"),
                     robust = c("none", "satorra.2000"),
                     try_k_more_times = 2,
                     semlbci_out = NULL,
@@ -176,7 +181,8 @@ semlbci <- function(sem_out,
                     ...,
                     parallel = FALSE,
                     ncpus = 2,
-                    use_pbapply = TRUE) {
+                    use_pbapply = TRUE,
+                    loadbalancing = TRUE) {
     if (!inherits(sem_out, "lavaan")) {
         stop("sem_out is not a supported object.")
       }
@@ -188,6 +194,20 @@ semlbci <- function(sem_out,
     method <- match.arg(method)
     robust <- match.arg(robust)
     sem_out_name <- deparse(substitute(sem_out))
+
+    # Use satorra.2000 automatically if
+    # - a scaled test is used and
+    # - the method is "ur"
+
+    scaled <- any(names(lavaan::lavInspect(sem_out, "test")) %in%
+                        c("satorra.bentler",
+                          "yuan.bentler",
+                          "yuan.bentler.mplus",
+                          "mean.var.adjusted",
+                          "scaled.shifted"))
+    if (scaled && (method == "ur")) {
+        robust <- "satorra.2000"
+      }
 
     # Check sem_out
     if (check_fit) {
@@ -208,8 +228,12 @@ semlbci <- function(sem_out,
         # Check whether semlbci_out and sem_out match
         tmp0 <- ptable[, c("id", "lhs", "op", "rhs", "group", "label")]
         tmp1 <- as.data.frame(semlbci_out)[, c("id", "lhs", "op", "rhs", "group", "label")]
+        tmp0 <- tmp0[order(tmp0$id), ]
+        tmp1 <- tmp1[order(tmp1$id), ]
+        rownames(tmp0) <- NULL
+        rownames(tmp1) <- NULL
         if (!identical(tmp0, tmp1)) {
-            stop("semblci_out and the parameter table of sem_out do not match.")
+            stop("semlbci_out and the parameter table of sem_out do not match.")
           }
         # Find pars with both lbci_lb and lbci_ub
         pars_lbci_yes <- !sapply(semlbci_out$lbci_lb, is.na) &
@@ -220,46 +244,20 @@ semlbci <- function(sem_out,
     i_id_free <- i_id[i]
     i_id_user <- i_id[(ptable$free == 0) & (ptable$op == ":=")]
     # pars must be the row numbers as in the lavaan parameterTable.
-    if (!is.null(pars)) {
-        # Parameters supplied
-        if (is.character(pars)) {
-            # Convert syntax to row numbers.
-            pars <- syntax_to_i(pars, sem_out)
-          }
-        if (standardized) {
-            # Always exclude variances fixed in the standardized solution
-            pars <- remove_v1(pars, sem_out)
-          }
-        # Remove parameters already with LBCIs in semlbci_out.
-        pars <- pars[!pars %in% i_id[pars_lbci_yes]]
-        # Ids in the vector of free parameters
-        i_selected <- i_id[pars]
-      } else {
-        # Start with all free parameters
-        pars <- i_id_free
-        if (standardized) {
-            # Intercepts and means not supported for standardized solution
-            remove_intercepts <- TRUE
-            # Always exclude variances fixed in the standardized solution
-            pars <- remove_v1(pars, sem_out)
-            # Include parameters free in the standardized solution,
-            # e.g., fixed loadings.
-            pars <- sort(unique(c(pars, free_in_std(i_id, sem_out))))
-          }
-        if (include_user_pars && length(i_id_user) > 0) {
-            pars <- c(pars, i_id_user)
-          }
-        if (remove_variances) {
-            pars <- remove_variances(pars, sem_out)
-          }
-        if (remove_intercepts) {
-            pars <- remove_variances(pars, sem_out)
-          }
-        # Remove parameters already with LBCIs in semlbci_out.
-        pars <- pars[!pars %in% i_id[pars_lbci_yes]]
-        # Ids in the vector of free parameters
-        i_selected <- i_id[pars]
-      }
+    # Support operators: "~", "~~", "=~", ":="
+    pars_tmp <- fix_pars(pars = pars,
+                         sem_out = sem_out,
+                         standardized = standardized,
+                         include_user_pars = include_user_pars,
+                         remove_variances = remove_variances,
+                         remove_intercepts = remove_intercepts,
+                         pars_lbci_yes = pars_lbci_yes,
+                         i_id = i_id,
+                         i_id_free = i_id_free,
+                         i_id_user = i_id_user)
+    pars <- pars_tmp$pars
+    i_selected <- pars_tmp$i_selected
+
     if (length(pars) == 0) {
         if (is.null(semlbci_out)) {
             stop("The number of parameters selected is zero.")
@@ -303,6 +301,11 @@ semlbci <- function(sem_out,
                                        envir = environment())
         if (requireNamespace("pbapply", quietly = TRUE) &&
             use_pbapply) {
+            if (loadbalancing) {
+                pboptions_old <- pbapply::pboptions(use_lb = TRUE)
+                # Restore pboptions on exit
+                on.exit(pbapply::pboptions(pboptions_old))
+              }
             # Use pbapply
             args_final <- utils::modifyList(list(...),
                                     list(npar = npar,
@@ -351,7 +354,10 @@ semlbci <- function(sem_out,
                               sf_full = sf_full_list2,
                               which = which2,
                               MoreArgs = args_final,
-                              SIMPLIFY = FALSE)
+                              SIMPLIFY = FALSE,
+                              .scheduling = ifelse(loadbalancing,
+                                                   yes = "dynamic",
+                                                   no = "static"))
           }
         parallel::stopCluster(cl)
       } else {
@@ -414,6 +420,7 @@ semlbci <- function(sem_out,
             pstd$group[pstd$op == ":="] <- 0
             out_p <- merge(out_p, pstd[, c("lhs", "op", "rhs", "group", "est.std")],
                     by = c("lhs", "op", "rhs", "group"), all.x = TRUE, sort = FALSE)
+            out_p <- out_p[order(out_p$id), ]
           } else {
             out_p$est <- ptable[, c("est")]
           }
@@ -503,4 +510,62 @@ semlbci <- function(sem_out,
 
     class(out_p) <- c("semlbci", class(out_p))
     out_p
+  }
+
+#' @noRd
+# Process the `pars` argument
+
+fix_pars <- function(pars,
+                     sem_out,
+                     standardized,
+                     include_user_pars,
+                     remove_variances,
+                     remove_intercepts,
+                     pars_lbci_yes,
+                     i_id,
+                     i_id_free,
+                     i_id_user) {
+    if (!is.null(pars)) {
+        # Parameters supplied
+        if (is.character(pars)) {
+            pars <- pars_op(pars, sem_out = sem_out)
+            # Convert syntax to row numbers.
+            pars <- syntax_to_i(pars, sem_out)
+          }
+        if (standardized) {
+            # Always exclude variances fixed in the standardized solution
+            pars <- remove_v1(pars, sem_out)
+          }
+        # Remove parameters already with LBCIs in semlbci_out.
+        pars <- pars[!pars %in% i_id[pars_lbci_yes]]
+        # Ids in the vector of free parameters
+        i_selected <- i_id[pars]
+      } else {
+        # Start with all free parameters
+        pars <- i_id_free
+        if (standardized) {
+            # Intercepts and means not supported for standardized solution
+            remove_intercepts <- TRUE
+            # Always exclude variances fixed in the standardized solution
+            pars <- remove_v1(pars, sem_out)
+            # Include parameters free in the standardized solution,
+            # e.g., fixed loadings.
+            pars <- sort(unique(c(pars, free_in_std(i_id, sem_out))))
+          }
+        if (include_user_pars && length(i_id_user) > 0) {
+            pars <- c(pars, i_id_user)
+          }
+        if (remove_variances) {
+            pars <- remove_variances(pars, sem_out)
+          }
+        if (remove_intercepts) {
+            pars <- remove_intercepts(pars, sem_out)
+          }
+        # Remove parameters already with LBCIs in semlbci_out.
+        pars <- pars[!pars %in% i_id[pars_lbci_yes]]
+        # Ids in the vector of free parameters
+        i_selected <- i_id[pars]
+      }
+    list(pars = pars,
+         i_selected = i_selected)
   }
